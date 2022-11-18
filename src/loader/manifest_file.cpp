@@ -183,12 +183,6 @@ static void ReadDataFilesInSearchPaths(const std::string &override_env_var, cons
 
     if (!override_env_var.empty()) {
         bool permit_override = true;
-#ifndef XR_OS_WINDOWS
-        if (geteuid() != getuid() || getegid() != getgid()) {
-            // Don't allow setuid apps to use the env var
-            permit_override = false;
-        }
-#endif
         if (permit_override) {
             override_path = PlatformUtilsGetSecureEnv(override_env_var.c_str());
         }
@@ -552,7 +546,7 @@ void RuntimeManifestFile::CreateIfValid(const Json::Value &root_node, const std:
     // The Runtime manifest file needs the "runtime" root as well as a sub-node for "library_path".  If any of those aren't there,
     // fail.
     if (runtime_root_node.isNull() || runtime_root_node["library_path"].isNull() || !runtime_root_node["library_path"].isString()) {
-        error_ss << filename << " is missing required fields.  Verify all proper fields exist.";
+        error_ss << filename << " runtime is missing required fields.  Verify all proper fields exist.";
         LoaderLogger::LogErrorMessage("", error_ss.str());
         return;
     }
@@ -750,7 +744,11 @@ void ApiLayerManifestFile::CreateIfValid(ManifestFileType type, const std::strin
         layer_root_node["api_version"].isNull() || !layer_root_node["api_version"].isString() ||
         layer_root_node["library_path"].isNull() || !layer_root_node["library_path"].isString() ||
         layer_root_node["implementation_version"].isNull() || !layer_root_node["implementation_version"].isString()) {
-        error_ss << filename << " is missing required fields.  Verify all proper fields exist.";
+        error_ss << filename << " API layer is missing required fields.  Verify all proper fields exist." << layer_root_node.isNull() 
+        << layer_root_node["name"].isNull() << !layer_root_node["name"].isString() <<
+        layer_root_node["api_version"].isNull() << !layer_root_node["api_version"].isString() <<
+        layer_root_node["library_path"].isNull() << !layer_root_node["library_path"].isString() <<
+        layer_root_node["implementation_version"].isNull() << !layer_root_node["implementation_version"].isString();
         LoaderLogger::LogErrorMessage("", error_ss.str());
         return;
     }

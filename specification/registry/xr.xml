@@ -2203,6 +2203,15 @@ maintained in the default branch of the Khronos OpenXR GitHub project.
             <member><type>XrBool32</type>       <name>supportsFoveatedRendering</name></member>
         </type>
 
+        <!-- XR_MSFT_holographic_remoting -->
+        <type category="struct" name="XrRemotingConnectInfoMSFT">
+            <member values="XR_TYPE_REMOTING_CONNECT_INFO_MSFT"><type>XrStructureType</type> <name>type</name></member>
+            <member>const <type>void</type>*               <name>next</name></member>
+            <member>const <type>char</type>*               <name>remoteHostName</name></member>
+            <member><type>uint16_t</type>                <name>remotePort</name></member>
+            <member><type>XrBool32</type>                <name>secureConnection</name></member>
+        </type>
+        
         <!-- XR_MSFT_composition_layer_reprojection -->
         <type name="XrReprojectionModeMSFT" category="enum"/>
         <type category="struct" name="XrCompositionLayerReprojectionInfoMSFT" structextends="XrCompositionLayerProjection">
@@ -4025,6 +4034,14 @@ maintained in the default branch of the Khronos OpenXR GitHub project.
             <param><type>XrBool32</type> <name>enabled</name></param>
         </command>
 
+        <!-- commands for XR_MSFT_holographic_remoting -->
+        <command successcodes="XR_SUCCESS,XR_SESSION_LOSS_PENDING" errorcodes="XR_ERROR_FUNCTION_UNSUPPORTED,XR_ERROR_HANDLE_INVALID,XR_ERROR_INSTANCE_LOST,XR_ERROR_SESSION_LOST">
+            <proto><type>XrResult</type> <name>xrRemotingConnectMSFT</name></proto>
+            <param><type>XrInstance</type><name>instance</name></param>
+            <param><type>XrSystemId</type><name>systemId</name></param>
+            <param>const <type>XrRemotingConnectInfoMSFT</type>* <name>connectInfo</name></param>
+        </command>
+
         <!-- XR_MSFT_composition_layer_reprojection -->
         <command successcodes="XR_SUCCESS" errorcodes="XR_ERROR_FUNCTION_UNSUPPORTED,XR_ERROR_VALIDATION_FAILURE,XR_ERROR_RUNTIME_FAILURE,XR_ERROR_HANDLE_INVALID,XR_ERROR_INSTANCE_LOST,XR_ERROR_SIZE_INSUFFICIENT,XR_ERROR_VIEW_CONFIGURATION_TYPE_UNSUPPORTED,XR_ERROR_SYSTEM_INVALID">
             <proto><type>XrResult</type> <name>xrEnumerateReprojectionModesMSFT</name></proto>
@@ -5207,10 +5224,17 @@ maintained in the default branch of the Khronos OpenXR GitHub project.
         </require>
     </extension>
 
-    <extension name="XR_MSFT_extension_65" number="65" type="instance" supported="disabled">
+    <extension name="XR_MSFT_holographic_remoting" number="65" type="instance" supported="microsoft" protect="XR_USE_PLATFORM_WIN32">
         <require>
-            <enum value="1" name="XR_MSFT_extension_65_SPEC_VERSION"/>
-            <enum value="&quot;XR_MSFT_extension_65&quot;" name="XR_MSFT_extension_65_EXTENSION_NAME"/>
+            <enum value="1" name="XR_MSFT_holographic_remoting_SPEC_VERSION"/>
+            <enum value="&quot;XR_MSFT_holographic_remoting&quot;" name="XR_MSFT_HOLOGRAPHIC_REMOTING_EXTENSION_NAME"/>
+
+            <type name="XrRemotingConnectInfoMSFT"/>
+
+            <command name="xrRemotingConnectMSFT"/>
+
+            <enum offset="0" extends="XrStructureType" name="XR_TYPE_REMOTING_REMOTE_CONTEXT_PROPERTIES_MSFT"/>
+            <enum offset="1" extends="XrStructureType" name="XR_TYPE_REMOTING_CONNECT_INFO_MSFT"/>
         </require>
     </extension>
 

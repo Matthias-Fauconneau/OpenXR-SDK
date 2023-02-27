@@ -2211,7 +2211,7 @@ maintained in the default branch of the Khronos OpenXR GitHub project.
             <member><type>uint16_t</type>                <name>remotePort</name></member>
             <member><type>XrBool32</type>                <name>secureConnection</name></member>
         </type>
-        
+
         <!-- XR_MSFT_composition_layer_reprojection -->
         <type name="XrReprojectionModeMSFT" category="enum"/>
         <type category="struct" name="XrCompositionLayerReprojectionInfoMSFT" structextends="XrCompositionLayerProjection">
@@ -5224,7 +5224,14 @@ maintained in the default branch of the Khronos OpenXR GitHub project.
         </require>
     </extension>
 
-    <extension name="XR_MSFT_holographic_remoting" number="65" type="instance" supported="microsoft" protect="XR_USE_PLATFORM_WIN32">
+    <extension name="XR_MSFT_extension_65" number="65" type="instance" supported="disabled">
+        <require>
+            <enum value="1" name="XR_MSFT_extension_65_SPEC_VERSION"/>
+            <enum value="&quot;XR_MSFT_extension_65&quot;" name="XR_MSFT_extension_65_EXTENSION_NAME"/>
+        </require>
+    </extension>
+
+    <extension name="XR_MSFT_holographic_remoting" number="66" type="instance" supported="microsoft" protect="XR_USE_PLATFORM_WIN32">
         <require>
             <enum value="1" name="XR_MSFT_holographic_remoting_SPEC_VERSION"/>
             <enum value="&quot;XR_MSFT_holographic_remoting&quot;" name="XR_MSFT_HOLOGRAPHIC_REMOTING_EXTENSION_NAME"/>
@@ -5235,13 +5242,6 @@ maintained in the default branch of the Khronos OpenXR GitHub project.
 
             <enum offset="0" extends="XrStructureType" name="XR_TYPE_REMOTING_REMOTE_CONTEXT_PROPERTIES_MSFT"/>
             <enum offset="1" extends="XrStructureType" name="XR_TYPE_REMOTING_CONNECT_INFO_MSFT"/>
-        </require>
-    </extension>
-
-    <extension name="XR_MSFT_extension_66" number="66" type="instance" supported="disabled">
-        <require>
-            <enum value="1" name="XR_MSFT_extension_66_SPEC_VERSION"/>
-            <enum value="&quot;XR_MSFT_extension_66&quot;" name="XR_MSFT_extension_66_EXTENSION_NAME"/>
         </require>
     </extension>
 
